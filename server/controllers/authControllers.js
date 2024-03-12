@@ -67,6 +67,7 @@ export const login = async (req,res)=>{
 		_id: user._id,
 		fullName: user.fullName,
 		userName: user.userName,
+		profilePic: user.profilePic
 	})
 
   } catch (error) {
