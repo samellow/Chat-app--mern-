@@ -1,25 +1,24 @@
-import React from 'react'
-import useConversation from '../../zustand/useConversation'
-import { useSocketContext } from '../../context/SocketContext';
-const Conversation = ({conversation, lastIdx, emoji}) => {
-const { selectedConversation, setSelectedConversation} = useConversation()
+import { useSocketContext } from "../../context/SocketContext";
+import useConversation from "../../zustand/useConversation";
 
-const isSelected = selectedConversation?._id === conversation._id;
-const { onlineUsers } = useSocketContext();
-const isOnline = onlineUsers.includes(conversation._id);
+const Conversation = ({ conversation, lastIdx, emoji }) => {
+	const { selectedConversation, setSelectedConversation } = useConversation();
 
-  return (
-    <>
-		<div className= {`flex gap-2 items-center hover:bg-sky-500 rounded p-2 py-1 cursor-pointer
-			${isSelected ? "bg-sky-500" : ""}`}
-			onClick = {()=> setSelectedConversation(conversation)}
+	const isSelected = selectedConversation?._id === conversation._id;
+	const { onlineUsers } = useSocketContext();
+	const isOnline = onlineUsers.includes(conversation._id);
+
+	return (
+		<>
+			<div
+				className={`flex gap-2 items-center hover:bg-sky-500 rounded p-2 py-1 cursor-pointer
+				${isSelected ? "bg-sky-500" : ""}
+			`}
+				onClick={() => setSelectedConversation(conversation)}
 			>
- 				<div className={`avatar ${isOnline ? 'online' : ''}`}>
- 					<div className='w-12 rounded-full'>
- 						<img
- 							src= {conversation.profilePic}
-							alt='user avatar'
-						/>
+				<div className={`avatar ${isOnline ? "online" : ""}`}>
+					<div className='w-12 rounded-full'>
+						<img src={conversation.profilePic} alt='user avatar' />
 					</div>
 				</div>
 
@@ -30,9 +29,9 @@ const isOnline = onlineUsers.includes(conversation._id);
 					</div>
 				</div>
 			</div>
-                       {!lastIdx && <div className='divider my-0 py-0 h-1' />}
-		</>
-  )
-}
 
-export default Conversation
+			{!lastIdx && <div className='divider my-0 py-0 h-1' />}
+		</>
+	);
+};
+export default Conversation;
